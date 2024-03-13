@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import Grid from '@mui/material/Grid';
-import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardMedia, Typography, IconButton } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent, CardMedia, Typography, IconButton } from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
 
-
-export const Shop = () => {
+export const Shop = ({carts, setCarts}) => {
     const [products, setProducts] = useState([]);
+   
 
 
     useEffect(() => {
@@ -17,75 +18,82 @@ export const Shop = () => {
             .then(products => setProducts(products))
     }, [])
 
+    const addToCart = (product) => {
+        setCarts([...carts, product]);
+    }
+
     return (
         <div className="shop">
             <div className="shopTitle">
                 <h1>Goksel Store</h1>
             </div>
             <div className="products">
-                <ul>
-                    {
-                        products.map((product) => (
-                            <Box
-                                key={product.id}
-                                spacing={2}
-                            >
-                                {/* <img src={product.image} />
-                                {product.title}
-                                {product.category}
-                                {product.price}
-                                {product.rating.rate}
-                                {product.rating.count}
-                                {product.description} */}
+                <Grid container spacing={4}>
+                    {products.map((product) => (
+                        <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+                            <Card sx={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-around", gap: "5px" }}>
+                                <CardMedia
+                                    component="img"
+                                    height="250"
+                                    sx={{ objectFit: "cover" }}
+                                    image={product.image}
+                                    alt={product.title}
+                                />
+                                <CardContent>
+                                    <Typography
+                                        gutterBottom
+                                        variant="h5"
+                                        component="div"
+                                    >
+                                        {product.title}
+                                    </Typography>
+                                    <Typography color="GrayText">
+                                        Price
+                                        ${product.price}
+                                    </Typography>
+                                    <Accordion>
+                                        <AccordionSummary
+                                            expandIcon={<ExpandMoreIcon />}
+                                            aria-controls="panel1-content"
+                                            id="panel1-header"
+                                        >
+                                            Details
+                                        </AccordionSummary>
+                                        <AccordionDetails
+                                            sx={{ display: "flex", flexDirection: "column", gap: "15px", alignItems: "flex-start" }}
+                                        >
+                                            <Typography color="text.secondary">
+                                                {product.description}
+                                            </Typography>
+                                            <Typography color="warning.dark">
+                                                Rating Rate:
+                                                {product.rating.rate}
 
-                                <Grid container spacing={2}>
-                                    <Grid item xs={6}>
-                                        <Card>
-                                            <CardMedia component="img"
-                                                height="180" image={product.image} />
-                                        </Card>
-                                        <CardContent>
+                                            </Typography>
                                             <Typography
-                                                gutterBottom
-                                                variant="h5"
-                                                component="div"
-                                            >
-                                                {product.title}
+                                                color="warning.dark">
+                                                Rating Coount:
+                                                {product.rating.count}
                                             </Typography>
-                                            <Typography color="GrayText">
-                                                Price
-                                                ${product.price}
+                                            <Typography
+                                                color="success.main">
+                                                Category:
+                                                {product.category}
                                             </Typography>
-                                            <Accordion>
-                                                <AccordionSummary
-                                                >
-                                                    Details
-                                                </AccordionSummary>
-                                                <AccordionDetails>
-                                                    <Typography>
-                                                        Description:
-                                                        {product.description}
-                                                    </Typography>
-                                                    <Typography>
-                                                        Rating:
-                                                        {product.rating.rate}
-                                                        {product.rating.count}
-                                                    </Typography>
-                                                    <Typography>
-                                                        Category:
-                                                        {product.category}
-                                                    </Typography>
-                                                </AccordionDetails>
-                                            </Accordion>
-                                            <IconButton>
-                                                <AddShoppingCartIcon />
-                                            </IconButton>
-                                        </CardContent>
-                                    </Grid>
-                                </Grid>
-                            </Box>
-                        ))}
-                </ul>
+                                        </AccordionDetails>
+                                    </Accordion>
+                                    <IconButton
+                                        color="primary"
+                                        aria-label="add to shopping cart"
+                                        onClick={() => addToCart(product)}
+                                    >
+                                        <AddShoppingCartIcon />
+                                    </IconButton>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid>
             </div>
         </div>
     )
