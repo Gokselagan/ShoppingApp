@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import Grid from '@mui/material/Grid';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardMedia, Typography, IconButton } from "@mui/material";
 
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
 
 
 
@@ -75,15 +77,14 @@ export const Shop = () => {
                                                     </Typography>
                                                 </AccordionDetails>
                                             </Accordion>
+                                            <IconButton>
+                                                <AddShoppingCartIcon />
+                                            </IconButton>
                                         </CardContent>
                                     </Grid>
-
                                 </Grid>
-
-
                             </Box>
-                        ))
-                    }
+                        ))}
                 </ul>
             </div>
         </div>
