@@ -7,9 +7,10 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
 
-export const Shop = ({carts, setCarts}) => {
+export const Shop = ({ carts, setCarts, count, setCount }) => {
     const [products, setProducts] = useState([]);
-   
+
+
 
 
     useEffect(() => {
@@ -19,7 +20,8 @@ export const Shop = ({carts, setCarts}) => {
     }, [])
 
     const addToCart = (product) => {
-        setCarts([...carts, product]);
+       setCarts([...carts, product]);
+       setCount(count + 1)
     }
 
     return (
@@ -85,8 +87,11 @@ export const Shop = ({carts, setCarts}) => {
                                     <IconButton
                                         color="primary"
                                         aria-label="add to shopping cart"
+                                        size="small"
+                                        sx={{ mt: 2 }}
                                         onClick={() => addToCart(product)}
                                     >
+                                        Add To Chart
                                         <AddShoppingCartIcon />
                                     </IconButton>
                                 </CardContent>

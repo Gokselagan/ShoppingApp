@@ -1,14 +1,17 @@
 import websiteImg from "../../WebsiteImg.jpg"
-import { AppBar, Avatar, Box, Button, Stack, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Badge, Box, Button, Stack, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import "./styles.css";
+import { useState } from "react";
 
 
 
 
 
-export const Navbar = () => {
+export const Navbar = ({count}) => {
+
+   
     return (
         <Box>
             <AppBar position="static" color="inherit">
@@ -17,10 +20,10 @@ export const Navbar = () => {
                         component={Link}
                         to="/"
                     />
-                    <Stack sx={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-                        <Button component={Link} to="/cart" color="inherit">
+                    <Stack sx={{display:"flex", flexDirection:"row", alignItems:"center", gap:3}}>
+                        <Badge showZero badgeContent={count} component={Link} color="secondary" to="/cart">
                             <ShoppingCartIcon fontSize="large"/>
-                        </Button>
+                        </Badge>
 
                         <Typography sx={{fontWeight:"800", fontSize:"24px"}}>
                             <Link to="/">
