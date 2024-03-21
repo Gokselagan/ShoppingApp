@@ -20,8 +20,20 @@ export const Shop = ({ carts, setCarts, count, setCount }) => {
     }, [])
 
     const addToCart = (product) => {
-       setCarts([...carts, product]);
-       setCount(count + 1)
+
+        if(carts.some(item => item.id === product.id)){
+            const updatedCarts = carts.map((item)=>{
+                if(item.id === product.id){
+                    return {...item, count : item.count + 1};
+                }
+                return item;
+            });
+            setCarts(updatedCarts);
+        }else {
+            setCarts([...carts, {...product, count:1}]);
+        }
+        setCount(count + 1)
+      
     }
 
     return (

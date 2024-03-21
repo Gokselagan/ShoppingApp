@@ -1,7 +1,7 @@
 import { Approuter } from './Approuter';
 import { Navbar } from './Components/Navbar';
-import './App.css';
 import { useState } from 'react';
+import './App.css';
 
 
 export const App = () => {

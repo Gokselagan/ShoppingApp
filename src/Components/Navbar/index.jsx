@@ -1,9 +1,7 @@
 import websiteImg from "../../WebsiteImg.jpg"
-import { AppBar, Avatar, Badge, Box, Button, Stack, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Badge, Box, Stack, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import "./styles.css";
-import { useState } from "react";
 
 
 
